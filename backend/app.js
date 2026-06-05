@@ -24,3 +24,16 @@ const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en puerto ${PORT}`);
 });
+
+const authMiddleware = require('./middleware/authMiddleware');
+
+app.get(
+  '/api/profile',
+  authMiddleware,
+  (req, res) => {
+    res.json({
+      message: 'Ruta protegida',
+      user: req.user
+    });
+  }
+);
